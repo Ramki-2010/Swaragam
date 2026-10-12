@@ -78,6 +78,7 @@ must not depend on conversational memory from a previous session.
 | Codex-facing governance pointer | `AGENTS.md` — points to `CLAUDE.md`, never a second governance source | Rarely |
 | Volatile architectural state | `.ai-memory/architecture.md` | Often |
 | Settled decisions | `adr.md` | Append-only |
+| On-demand Research Review Board (procedure; decision is ADR-019) | `.claude/skills/review-board/SKILL.md`, reviewer type `.claude/agents/board-reviewer.md` | Only by explicit decision |
 | Frozen methodology | `.ai-memory/*-protocol.md` | Only by explicit decision |
 | Lessons | `.ai-memory/lessons.md` | Append-only |
 | Dataset facts and run logs | `.ai-memory/datasets.md`, `datasets/README.md` | Per run |

@@ -776,3 +776,26 @@
   Residual plug-in H2 bias was not independently quantified. Run logged in
   datasets.md (2026-08-17); artifacts at
   `Q001B-A results/run_20260817_074952_n50000_seed0/`.
+
+### L-055: Parallel Reviewers Are Not Independent Evidence -- Challenge the Brief, Restrict the Tools
+- **Date**: 2026-10-12
+- **Context**: In the Q-003 Research Council, six separate subagents read a
+  shared evidence brief. Four of them independently "found" the same
+  same-singer tonic interval. All four had computed it from the same rows of
+  one CSV, using the same base model. Separately, a mandatory section asking
+  "what in the brief is wrong" caught three defects in the parent's own brief:
+  an overstated peak pattern, a mislabelled clip, and a composition-identity
+  claim drawn from filenames. Read-only behaviour rested on instructions
+  alone, because every built-in agent type could run Bash.
+- **Rule**: Separate contexts give *perspective diversity*, not *evidential
+  independence*. Count a finding by its underlying source, not by how many
+  reviewers reported it. N reviewers reading one dataset make one
+  observation. Make every shared brief challengeable, by requiring each
+  reviewer to report what in it is wrong or overstated. Enforce read-only with
+  tool restrictions where possible, not with instructions alone. Label claims
+  the parent did not verify as "reviewer-reported".
+- **Impact**: Without this, a multi-agent review inflates confidence: one
+  observation becomes "four confirmations". Errors in the brief propagate
+  unchallenged into every reviewer's conclusions, and safety depends on each
+  agent following its instructions. Applied in ADR-019 and the
+  `/review-board` procedure.

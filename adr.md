@@ -305,6 +305,38 @@ already made and evidenced elsewhere in the memory files. Generated
   evaluation-protocol.md; ADR-009, ADR-011, ADR-016 (enforcement-gap and
   LOO-trust precedent).
 
+### ADR-019: Research Review Board — On-Demand, Advisory, Dynamically Composed
+- **Context**: Some research decisions need challenge from several
+  perspectives, which `/analyze-swarag` does not provide: its five roles are
+  fixed, engineering-focused, and simulated within one model (ADR-012). The
+  2026-10-12 Q-003 Council ran six separate read-only subagents. That showed
+  the value of separate contexts, a shared evidence brief that reviewers must
+  challenge, verification of key claims by the parent, and explicit
+  correlation accounting. It also showed that its six roles were specific to
+  one problem, and that parallel reviewers reading the same data are not
+  independent evidence (L-055).
+- **Decision**: Adopt a Research Review Board as an on-demand capability.
+  Each invocation assembles **six perspectives chosen by Claude for that
+  problem**. No roles, prompts or evidence packages are fixed. The procedure
+  lives only in `.claude/skills/review-board/SKILL.md`, which is user-invoked
+  only (`/review-board`). Reviewers run as the role-neutral, read-only
+  `board-reviewer` subagent (`.claude/agents/board-reviewer.md`). This does
+  not replace, wrap or modify the Multi-Agent Analyst (ADR-012, RULE 13,
+  workflow.md §12).
+- **Consequence**: Hard questions can get multi-perspective review without
+  standing roles drifting into canon. The Board is **advisory**. It has no
+  authority to advance phases, authorise experiments, or change code, data,
+  caches, canonical results, governance or ADRs, and it cannot commit; all of
+  that remains under CLAUDE.md and explicit researcher approval. Its reports
+  are non-canonical unless separately approved for recording. Costs: about six
+  subagent contexts per run, so it inherits ADR-012's on-demand rule. The
+  read-only guarantee is enforced by tool restriction, so it holds only where
+  the `board-reviewer` type is loaded; otherwise it falls back to instructions.
+- **Status**: ACTIVE.
+- **Date**: 2026-10-12.
+- **Source**: Q-003 Council run and forensic report (2026-10-12, session
+  records outside the repository); L-055; ADR-012; L-014.
+
 ---
 
 ## Maintenance Rule
