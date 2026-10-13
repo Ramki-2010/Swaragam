@@ -337,6 +337,36 @@ already made and evidenced elsewhere in the memory files. Generated
 - **Source**: Q-003 Council run and forensic report (2026-10-12, session
   records outside the repository); L-055; ADR-012; L-014.
 
+### ADR-020: Review Board Enforcement Scope and Reviewer Isolation (refines ADR-019)
+- **Context**: The 2026-10-12 runtime smoke test of ADR-019 found two problems.
+  First, reviewer Read, Grep and Glob are not limited to particular paths: one reviewer read sibling
+  reviewers' perspective names from the session log. Second, ADR-019's
+  Consequence says the Board "cannot commit". That is true only of the
+  tool-restricted reviewers; the orchestrating parent keeps its full toolset.
+  ADR-019 is ACTIVE and is not edited (Maintenance Rule), and its decision stands.
+- **Decision**: (1) Project permission deny rules in `.claude/settings.json` keep reviewers out of
+  session transcripts. They deny `Read` on `~/.claude/projects/*/*.jsonl` and
+  `~/.claude/projects/**/subagents/**`. On 2026-10-12 this was verified to deny a
+  `board-reviewer`'s direct Read and Grep, and to exclude those files from its
+  recursive searches. (2) ADR-019's "cannot commit" is scoped as follows:
+  reviewers technically cannot write, execute or spawn. The parent's advisory limits
+  are procedural (CLAUDE.md, the `/review-board` procedure, researcher approval),
+  not technical. (3) **Deferred, not decided:** a reverse pointer from the
+  Multi-Agent Analyst documentation (ADR-012, RULE 13, workflow.md §12) to the Board,
+  and a rule for choosing between the two. Those documents are protected, so
+  adding either needs a separate decision.
+- **Consequence**: Reviewer isolation is now technical for the known transcript
+  paths, and only for those. Reviewers can still read every other path, and the docs
+  describe Read rules as best-effort for Grep and Glob. The deny rules also apply to the main
+  conversation's Read tool, so the parent audits transcripts through Bash. Nothing
+  technical binds the parent; its advisory status rests on governance.
+- **Status**: ACTIVE.
+- **Date**: 2026-10-12.
+- **Source**: `/review-board` smoke test, 2026-10-12, and the isolation test
+  (session records outside the repository); Claude Code permissions documentation
+  (deny rules apply to subagents; `//`/`~/` path anchors); ADR-019;
+  `.claude/skills/review-board/SKILL.md` §4 and §9.
+
 ---
 
 ## Maintenance Rule

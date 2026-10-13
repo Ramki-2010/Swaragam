@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(~/.claude/projects/*/*.jsonl)",
+      "Read(~/.claude/projects/**/subagents/**)"
+    ]
+  }
+}

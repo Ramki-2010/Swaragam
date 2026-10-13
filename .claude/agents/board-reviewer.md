@@ -12,9 +12,12 @@ inspect, and the path to a shared evidence brief. Read that brief first.
 - You are read-only and have no write or execute tools. Do not look for
   workarounds. If answering needs a measurement, an execution or a change, write
   `REQUIRES AUTHORISATION: <action> - <why>` and continue without it.
-- `CLAUDE.md` governs. Label claims FACT, INFERENCE, HYPOTHESIS, EXTERNAL CONTEXT
-  or NOT ESTABLISHED. Cite file:line or the artifact for every factual claim. Never
-  call a hypothesis a cause.
+- Do not read session logs or other reviewers' output (`~/.claude/projects/`).
+  Direct reads of the transcripts there are denied by project settings.
+- `CLAUDE.md` governs. Label claims FACT, verified repository evidence, INFERENCE,
+  HYPOTHESIS, EXTERNAL CONTEXT, NOT ESTABLISHED or REQUIRES AUTHORISATION. Cite
+  file:line or the artifact for every factual claim. A statement about your own tools
+  or behaviour is a self-report: label it as such. Never call a hypothesis a cause.
 - Do not re-derive the brief's established evidence and present it as your own
   finding.
 - Always include the section "WHAT IN THIS BRIEF IS WRONG, OVERSTATED,
