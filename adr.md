@@ -367,6 +367,73 @@ already made and evidenced elsewhere in the memory files. Generated
   (deny rules apply to subagents; `//`/`~/` path anchors); ADR-019;
   `.claude/skills/review-board/SKILL.md` §4 and §9.
 
+### ADR-021: Review Board Audit Archive, Minimized Export and Provenance Ledger (refines ADR-019 and ADR-020)
+- **Context**: ADR-019 and ADR-020 cite Board runs only as "session records outside the
+  repository". Those records are deletable and cannot be checked from the repository
+  (CLAUDE.md §18). A repository-native provenance record was proposed on 2026-10-12 and
+  deferred. On 2026-10-13 an unpushed design made a full raw-session export to Downloads
+  mandatory after every Board. Review found that this retained far more than auditing needs:
+  injected context, reasoning blocks and unrelated session content. It claimed redaction
+  more strongly than the tool delivered, had no secret scan, could not export reviewers of
+  the §4 fallback type, and placed transcript copies outside ADR-020's deny rules, where
+  later reviewers could read them. That design was replaced before push. ADR-019 and
+  ADR-020 are ACTIVE and are not edited; their decisions stand.
+- **Decision**: (1) **Local archive.** Board audit packages live in the project-local,
+  gitignored `review_board_archive/`. It is a retention area, never committed, outside the
+  CLAUDE.md §4a source-of-truth hierarchy. Storing something there does not make it
+  canonical evidence. (2) **Minimized export by default.** After every Board the parent builds
+  a package with `scripts/_export_review_board.py` (SKILL.md §10). It contains the brief, the
+  report, a roster, each reviewer's final report, minimized transcripts and the parent's
+  Board segment (text, tool calls and tool results only), verification files, a manifest, a
+  secret-scan report, `SHA256SUMS.txt` and a draft provenance entry. Reasoning blocks,
+  injected context, session metadata and the full raw session log are excluded.
+  (3) **Full raw-session export is opt-in** (`--full-session-log`). It is used only when the
+  researcher explicitly asks for it for that run. (4) **Protection** is described only as
+  identifier redaction for known classes and a best-effort secret scan. The classes are:
+  emails, owner name tokens, the Windows username, org and account IDs on narrow patterns,
+  and session IDs. The scan finds common credential formats and records findings without
+  their values. No package is described as fully redacted, private or secret-free, and an
+  empty scan proves nothing. (5) **Roster.** Reviewers are exported from a roster written
+  at launch, whatever their agent type. Without a roster, a documented `board-reviewer`
+  fallback applies. A reviewer with no transcript or final report is recorded as `MISSING`
+  and reported to the researcher, never dropped. (6) **Reviewer isolation from prior
+  archives.** `.claude/settings.json` also denies `Read(/review_board_archive/**)`, and
+  `board-reviewer.md` prohibits archive reads. Evidence from a past package reaches a reviewer
+  only when the parent copies it into the brief. (7) **Provenance is separate from transcript
+  retention.** `docs/review-board/PROVENANCE.md` is the durable, append-only record: date,
+  question, HEAD, roster, enforcement, isolation result, artifact hashes, and no transcript
+  content. An entry, approved by the researcher, must exist **before** any Board finding is
+  used as supporting evidence in a canonical document (an ADR, PHASE_LOG, PROJECT_STATUS, a
+  research plan, lessons or other source-of-truth documentation). (8) **Historical exports.**
+  The two existing Downloads exports (2026-10-12 Council, 2026-10-13 Q-003 Board) were moved
+  into the archive. Each was preserved verbatim with an inventory and verified hashes before
+  its original was removed, and labelled historical: it predates this architecture, is kept
+  for audit and reference, and is not a governance authority. A minimized package was derived
+  from each. They are **not** entered in the ledger; backfill is a separate decision.
+  (9) **Approval boundaries.** Building a package is the only step the parent takes without
+  asking, because it writes nothing that Git tracks. Ledger entries, backfill, and any use of
+  a Board finding in a canonical document need researcher approval, as before (ADR-019; SKILL.md §9).
+- **Consequence**: A cited Board run becomes checkable from the repository: the ledger holds
+  its hashes, and the local package holds the content they cover. Retention shrinks to what
+  auditing needs. Limits: a package exists only on the researcher's machine, so if it is lost
+  the ledger records what existed but cannot be re-checked. Redaction covers known identifier
+  classes only, and the secret scan is pattern-based. Archive isolation is path-specific,
+  like ADR-020: Grep and Glob coverage is best-effort, and the parent is not technically
+  bound. In this session, settings changes took effect after a delay, so a newly added deny
+  rule must be re-tested after a pause before it is relied on. Historical `source_as_found/`
+  copies still hold full session material, including reasoning blocks, because that is how
+  they were originally exported.
+- **Status**: ACTIVE.
+- **Date**: 2026-10-13.
+- **Source**: Review of the replaced, unpushed commit `36bee7e` (2026-10-13); the deferred
+  2026-10-12 provenance target; runtime isolation test, 2026-10-13. In that test a
+  `board-reviewer` (agent `a156b20f19d737a80`) was denied a direct Read of the archive, and
+  Grep and Glob returned nothing from it. A similarly named folder outside the archive and
+  ordinary repository files stayed readable. The parent's Bash access and ADR-020's
+  session-log denial were unchanged. Verified from the raw transcript. Exporter tests:
+  synthetic planted credentials and identifiers, and a live export from unredacted logs.
+  ADR-019; ADR-020; L-055; `.claude/skills/review-board/SKILL.md` §4 and §10.
+
 ---
 
 ## Maintenance Rule

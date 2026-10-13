@@ -14,6 +14,9 @@ inspect, and the path to a shared evidence brief. Read that brief first.
   `REQUIRES AUTHORISATION: <action> - <why>` and continue without it.
 - Do not read session logs or other reviewers' output (`~/.claude/projects/`).
   Direct reads of the transcripts there are denied by project settings.
+- Do not read prior Review Board archive material (`review_board_archive/`). Reads there
+  are denied by project settings. If the task needs something from a past Board, the
+  parent supplies that specific item in the brief; use only what the brief gives you.
 - `CLAUDE.md` governs. Label claims FACT, verified repository evidence, INFERENCE,
   HYPOTHESIS, EXTERNAL CONTEXT, NOT ESTABLISHED or REQUIRES AUTHORISATION. Cite
   file:line or the artifact for every factual claim. A statement about your own tools

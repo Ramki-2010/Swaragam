@@ -2,7 +2,8 @@
   "permissions": {
     "deny": [
       "Read(~/.claude/projects/*/*.jsonl)",
-      "Read(~/.claude/projects/**/subagents/**)"
+      "Read(~/.claude/projects/**/subagents/**)",
+      "Read(/review_board_archive/**)"
     ]
   }
 }

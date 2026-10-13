@@ -108,6 +108,14 @@ not ground truth.
   This is a **path-specific** restriction, not a sandbox: reviewers can still read every
   other path. The parent audits reviewer transcripts through Bash, which these `Read` rules do not cover.
   If the deny rules are not active, record isolation as procedural only.
+- **Archive isolation (ADR-021).** Reviewers must not read prior Board audit packages.
+  `.claude/settings.json` also denies `Read(/review_board_archive/**)`; the leading `/` anchors
+  the pattern at the project root. In a runtime test on 2026-10-13, a `board-reviewer`'s direct
+  Read of the archive was denied, and recursive Grep and Glob from the repository root returned
+  nothing from it. A similarly named folder outside the archive, and ordinary repository files,
+  stayed readable. Grep and Glob coverage is best-effort, as for session logs. If a reviewer
+  needs something from a past package, the parent copies that specific item into the brief
+  and labels it. The parent audits the archive through Bash.
 
 ## 5. Parent verification
 

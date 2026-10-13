@@ -78,7 +78,7 @@ must not depend on conversational memory from a previous session.
 | Codex-facing governance pointer | `AGENTS.md` — points to `CLAUDE.md`, never a second governance source | Rarely |
 | Volatile architectural state | `.ai-memory/architecture.md` | Often |
 | Settled decisions | `adr.md` | Append-only |
-| On-demand Research Review Board (procedure; decisions are ADR-019 and ADR-020) | `.claude/skills/review-board/SKILL.md`, reviewer type `.claude/agents/board-reviewer.md`, reviewer isolation `.claude/settings.json`, audit-package exporter `scripts/_export_review_board.py` | Only by explicit decision |
+| On-demand Research Review Board (procedure; decisions are ADR-019, ADR-020 and ADR-021) | `.claude/skills/review-board/SKILL.md`, reviewer type `.claude/agents/board-reviewer.md`, reviewer isolation `.claude/settings.json`, audit-package exporter `scripts/_export_review_board.py` | Only by explicit decision |
 | Review Board provenance (durable record of Board runs; hashes, not transcripts) | `docs/review-board/PROVENANCE.md` | Append-only, with researcher approval |
 | Review Board audit packages (local retention; gitignored; **not** a source of truth) | `review_board_archive/` (never committed) | Per Board run |
 | Frozen methodology | `.ai-memory/*-protocol.md` | Only by explicit decision |
