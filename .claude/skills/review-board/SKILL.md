@@ -12,7 +12,11 @@ disable-model-invocation: true
 If nothing was supplied above, ask the researcher for the question. Do not infer one.
 
 **Standing.** Advisory only. The decision is recorded in `adr.md` ADR-019; ADR-020 records how it is enforced. `CLAUDE.md`
-governs everything below: this procedure adds no rule and grants no permission.
+governs everything below. This procedure grants no permission beyond what CLAUDE.md and the
+researcher have granted. Its only obligations are procedural steps for the parent within a
+Board run; the §10 audit package was adopted by the researcher's explicit instruction of
+2026-10-13. Nothing here authorises a repository change, a phase advance, an experiment, a
+commit or a push.
 It is separate from `/analyze-swarag` (ADR-012), which it neither wraps nor
 replaces. It may recommend `/analyze-swarag` when that tool fits better.
 
@@ -85,6 +89,11 @@ not ground truth.
 - Use the Agent tool with `subagent_type: board-reviewer`. It is role-neutral and its only
   working tools are Read, Grep and Glob; the harness also adds its hand-back tool. If that type is not loaded in this session, use a
   built-in type and **record that read-only was enforced by instruction only**.
+- **Roster.** At launch, write `review_board_roster_<YYYYMMDD_HHMM>.json` to the scratchpad:
+  `{"reviewers": [{"id", "perspective", "agent_type", "enforcement"}]}`, one entry per reviewer.
+  `id` is the agent id the Agent tool returns; `enforcement` is `tool` for `board-reviewer`,
+  otherwise `instruction-only`. The §10 export reads it. It is **required** whenever the
+  fallback type is used, because the exporter cannot otherwise find those reviewers.
 - Each prompt contains the brief's path plus that perspective's remit: expertise,
   questions, permitted reading and required output shape. Required output: verdict,
   labelled findings with sources (file:line, artifact or calculation), the
@@ -178,5 +187,48 @@ CLAUDE.md §§5, 8, 14–17a apply unchanged. Board output enters the repository
 with the researcher's approval, through normal documentation (for example, an append-only
 PHASE_LOG observation).
 
-Offer to export the brief and report. Reviewer transcripts persist in the session log
-(`~/.claude/projects/<project>/<session>/subagents/`).
+## 10. Audit package and provenance: mandatory after every Board
+
+Adopted by the researcher's instruction of 2026-10-13 (ADR-021). After the report is
+delivered, the parent always builds a minimized audit package. This is not an offer.
+Building it is the only step the parent takes without asking, because it writes nothing
+that Git tracks.
+
+1. **Account for every reviewer.** The report names each reviewer and confirms it reported.
+   None may arrive unannounced.
+2. **Audit isolation.** Check each reviewer's transcript (through Bash, as in §4) for
+   file-access calls that name session logs or `review_board_archive/`. Record the result.
+3. **Build the package** from the repository root:
+
+   ```
+   my_virtual_env_swarag\Scripts\python.exe scripts\_export_review_board.py export --session <session-uuid> --label <short_label> --question "<question>" --roster <roster.json> --brief <brief.md> --report <report.md> --since <ISO launch time> --extra <verification files...> --isolation-status "<step 2 result>"
+   ```
+
+   It writes `review_board_archive/<YYYY-MM-DD>/<label>_<HHMM>/`. That folder is local and
+   gitignored, sits outside the source-of-truth hierarchy, and is not canonical evidence. The
+   tool never overwrites an existing package.
+4. **What the package contains by default (minimized):** the brief, the report,
+   `roster.json`, each reviewer's final report, minimized reviewer transcripts and the
+   parent's Board segment (user/assistant text, tool calls and tool results only), the
+   verification files, `manifest.json`, the secret-scan report, `SHA256SUMS.txt` and
+   `provenance_entry.md`. Thinking blocks, injected or system context, session metadata and
+   the full raw session log are **excluded**. The full raw log is added only with
+   `--full-session-log`, and only when the researcher explicitly asks for it for that run.
+5. **Describe protection exactly as:** identifier redaction for known classes and a
+   best-effort secret scan. Never call a package fully redacted, private or secret-free.
+   Report the number of secret findings. Absence of findings proves nothing.
+6. **Fallback and failure.** Without `--roster`, the tool falls back to `board-reviewer`
+   subagents started at or after `--since`, which cannot find fallback-type reviewers. A
+   reviewer with no transcript or final report is recorded as `MISSING`, never dropped. If
+   the export is blocked, or a reviewer is `MISSING`, report the cause to the researcher;
+   that report completes this step.
+7. **Provenance.** `provenance_entry.md` is a draft ledger entry. It must be entered in
+   `docs/review-board/PROVENANCE.md`, with the researcher's approval (§9), **before** any
+   finding of the Board is used as supporting evidence in a canonical document: an ADR,
+   PHASE_LOG, PROJECT_STATUS, a research plan, lessons, or other source-of-truth
+   documentation. Otherwise entering it is optional.
+8. **Report** the package path, the roster status, the secret-finding count and the
+   `SHA256SUMS.txt` hash.
+
+Reviewer transcripts also remain in the session log
+(`~/.claude/projects/<project>/<session>/subagents/`) for as long as Claude Code keeps it.

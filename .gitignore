@@ -21,6 +21,10 @@ Q001B-A results/
 Q003 Bhairavi Diagnosis results/
 scripts/q001ba_canonical.log
 
+# Review Board local audit archive (ADR-021): local retention only, never committed,
+# not part of the source-of-truth hierarchy
+review_board_archive/
+
 # ========================
 # VIRTUAL ENVIRONMENTS
 # ========================
