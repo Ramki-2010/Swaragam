@@ -21,8 +21,25 @@
 set -uo pipefail
 
 fail=0
+
+# README / PROJECT_STATUS.md / report-page consistency (stdlib-only scripts).
+# Runs only when one of the files that feed the README results mirror is staged.
+PY=python3
+[ -x my_virtual_env_swarag/Scripts/python.exe ] && PY=my_virtual_env_swarag/Scripts/python.exe
+if git diff --cached --name-only | grep -qE '^(README\.md|PROJECT_STATUS\.md|docs/index\.html|docs/_report_template\.html)$'; then
+    echo "pre-commit: checking README results mirror and report page..."
+    "$PY" scripts/_sync_readme_results.py || fail=1
+    "$PY" scripts/_build_report_page.py --check || fail=1
+fi
+
 py_files=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.py$' || true)
-[ -z "$py_files" ] && exit 0
+if [ -z "$py_files" ]; then
+    if [ "$fail" -ne 0 ]; then
+        echo "pre-commit: BLOCKED. Run: python scripts/_sync_readme_results.py --write (then restage README.md and docs/index.html), or bypass deliberately with --no-verify."
+        exit 1
+    fi
+    exit 0
+fi
 
 echo "pre-commit: auditing staged Python files..."
 
@@ -30,7 +47,7 @@ for f in $py_files; do
     [ -f "$f" ] || continue
 
     # 1. Syntax must compile.
-    if ! python3 -m py_compile "$f" 2>/tmp/pyc_err; then
+    if ! "$PY" -m py_compile "$f" 2>/tmp/pyc_err; then
         echo "  FAIL [syntax]      $f"
         sed 's/^/                     /' /tmp/pyc_err
         fail=1

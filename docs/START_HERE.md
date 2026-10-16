@@ -75,6 +75,7 @@ must not depend on conversational memory from a previous session.
 | Repository consistency audits | `docs/repository-consistency-audit.md` (+ `.json`) | Dated snapshots |
 | Stable conceptual architecture | `docs/ARCHITECTURE.md` | Rarely |
 | Visual identity decisions | `docs/VISUAL_IDENTITY.md` | Per identity decision |
+| Illustrated report (generated from `README.md`; **not** a source of truth) | `docs/index.html`, built by `scripts/_build_report_page.py` from `docs/_report_template.html` | Regenerate after any `README.md` change; `--check` reports staleness |
 | Codex-facing governance pointer | `AGENTS.md` — points to `CLAUDE.md`, never a second governance source | Rarely |
 | Volatile architectural state | `.ai-memory/architecture.md` | Often |
 | Settled decisions | `adr.md` | Append-only |

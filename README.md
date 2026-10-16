@@ -8,6 +8,8 @@ statistical modeling, emphasizing explainability, musical grammar, and bias corr
   <img src="docs/assets/swaragam-banner.png" alt="Swaragam banner featuring the Carnatic resonance motif">
 </p>
 
+<p align="center"><a href="https://ramki-2010.github.io/Swaragam/"><b>Read the illustrated report</b></a></p>
+
 ## What Swaragam is
 A deterministic recognition engine. No neural network, no learned embedding —
 every decision traces to a measured pitch distribution and a transition matrix.

@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Swaragam — Research Report</title>
+<!-- GENERATED from README.md by scripts/_build_report_page.py. Edit the template (docs/_report_template.html) or the README, never this file. Palette: docs/VISUAL_IDENTITY.md. -->
+<style>
+  :root{
+    --kumkum:#7A1F2B; --ivory:#F4EDE1; --gold:#C9A227; --brass:#8B6914; --brown:#5C3A21;
+    --parch:#F3E0C2;        /* sampled from the banner's central ground */
+    --parch-edge:#E9CBA0;   /* sampled from the banner's edges */
+    --card:rgba(255,248,235,.55);
+    --rule:rgba(92,58,33,.28);
+    --serif:Georgia,'Times New Roman',Times,serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; min-height:100vh; padding-left:max(40px,env(safe-area-inset-left,0px)); padding-right:max(40px,env(safe-area-inset-right,0px)); color:var(--brown); font:17px/1.65 var(--serif); position:relative; overflow-x:hidden;
+    background:
+      radial-gradient(ellipse at 50% 20%, var(--parch) 0%, var(--parch) 40%, var(--parch-edge) 100%) fixed,
+      var(--parch);
+  }
+  /* paper grain */
+  body::before{content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.35; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .36  0 0 0 0 .23  0 0 0 0 .13  0 0 0 .28 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");}
+  /* fixed backdrop: never scrolls, only the content moves over it */
+  .bg{position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden}
+  .bg > div{position:absolute; mix-blend-mode:multiply}
+  .bg .lotus{left:50%; top:50%; width:min(118vw,980px); aspect-ratio:1000/962; transform:translate(-50%,-50%);
+    background:url(assets/lotus-mandala.png) center/contain no-repeat; opacity:.2}
+  .bg .lotus2{left:-9vmin; top:-8vmin; width:min(46vmin,380px); aspect-ratio:1000/962; transform:rotate(-14deg);
+    background:url(assets/lotus-mandala.png) center/contain no-repeat; opacity:.14}
+  .bg .lotus3{right:-12vmin; bottom:-10vmin; width:min(52vmin,430px); aspect-ratio:1000/962; transform:rotate(18deg);
+    background:url(assets/lotus-mandala.png) center/contain no-repeat; opacity:.12}
+  .bg .temple{right:3vw; bottom:0; width:182px; height:287px; background:url(assets/temple-gopuram.png) center/contain no-repeat; opacity:.32;
+    -webkit-mask-image:linear-gradient(to top,#000 55%,transparent); mask-image:linear-gradient(to top,#000 55%,transparent)}
+  @media (max-width:600px){.bg .temple{right:0; opacity:.22}}
+  .frame{position:fixed; inset:10px; z-index:3; pointer-events:none; border:1px solid var(--brass); outline:1px solid var(--gold); outline-offset:-6px}
+  .frame i{position:absolute; width:46px; height:46px;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 46 46' fill='none' stroke='%237A1F2B' stroke-width='1.6'><path d='M4 42V14C4 8 8 4 14 4H42'/><path d='M12 42V20C12 15 15 12 20 12H42' stroke='%23C9A227' stroke-width='1.2'/><circle cx='4' cy='4' r='3' fill='%23C9A227' stroke='none'/></svg>")}
+  .frame i:nth-child(1){left:-2px;top:-2px} .frame i:nth-child(2){right:-2px;top:-2px;transform:scaleX(-1)}
+  .frame i:nth-child(3){left:-2px;bottom:-2px;transform:scaleY(-1)} .frame i:nth-child(4){right:-2px;bottom:-2px;transform:scale(-1)}
+  .sheet{position:relative; z-index:2; max-width:900px; margin:0 auto; padding:30px 0 10px}
+  @media (max-width:760px){body{padding-left:max(26px,env(safe-area-inset-left,0px)); padding-right:max(26px,env(safe-area-inset-right,0px))} .frame{inset:6px}}
+  .wrap{max-width:980px; margin:0 auto; padding:0; position:relative; z-index:2}
+  .orn{display:block; width:260px; height:30px; margin:0 auto; background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 30' fill='none'><path d='M6 15H100M160 15H254' stroke='%238B6914' stroke-width='1'/><path d='M100 15q10-2 14 4M160 15q-10-2-14 4' stroke='%238B6914' stroke-width='1'/><circle cx='4' cy='15' r='2' fill='%23C9A227'/><circle cx='256' cy='15' r='2' fill='%23C9A227'/><path d='M130 4C134 10 134 20 130 26C126 20 126 10 130 4Z' fill='%23C9A227' stroke='%237A1F2B' stroke-width='1.1'/><path d='M130 26C120 24 116 16 118 11C124 13 129 18 130 26ZM130 26C140 24 144 16 142 11C136 13 131 18 130 26Z' fill='%23F4EDE1' stroke='%237A1F2B' stroke-width='1.1'/></svg>") center/260px 30px no-repeat}
+  header.hero{position:relative; z-index:2; padding:0; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw)}
+  .hero .wrap{max-width:none}
+  .hero img{display:block; width:100%; height:auto;
+            -webkit-mask-image:linear-gradient(to bottom,#000 88%,transparent); mask-image:linear-gradient(to bottom,#000 88%,transparent)}
+  @media (max-width:700px){.hero .wrap{overflow-x:auto; -webkit-overflow-scrolling:touch} .hero img{width:760px; max-width:none}}
+  nav{position:sticky; top:env(safe-area-inset-top,0px); z-index:6; margin:18px 0 0;
+      background:linear-gradient(to bottom,rgba(243,224,194,.78) 0,rgba(243,224,194,.6) 55%,rgba(243,224,194,0) 100%)}
+  nav::before{content:""; position:absolute; left:0; right:0; top:0; height:1px;
+      background:linear-gradient(to right,transparent,var(--brass) 25%,var(--brass) 75%,transparent); opacity:.55}
+  nav .wrap{display:flex; justify-content:center; gap:6px 18px; flex-wrap:wrap; padding:12px 6px 26px;
+            font-size:13px; letter-spacing:.14em; text-transform:uppercase}
+  nav a{color:var(--brown); text-decoration:none; border-bottom:1px solid transparent}
+  nav a:hover{color:var(--kumkum); border-color:var(--kumkum)}
+  h1,h2,h3{font-weight:normal; color:var(--kumkum); line-height:1.2}
+  h1{font-size:48px; margin:6px 0 4px; text-align:center; letter-spacing:.04em}
+  h2{font-size:28px; margin:0 0 10px; text-align:center; letter-spacing:.05em}
+  h2::after{content:""; display:block; width:260px; height:30px; margin:6px auto 0; background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 260 30' fill='none'><path d='M6 15H100M160 15H254' stroke='%238B6914' stroke-width='1'/><path d='M100 15q10-2 14 4M160 15q-10-2-14 4' stroke='%238B6914' stroke-width='1'/><circle cx='4' cy='15' r='2' fill='%23C9A227'/><circle cx='256' cy='15' r='2' fill='%23C9A227'/><path d='M130 4C134 10 134 20 130 26C126 20 126 10 130 4Z' fill='%23C9A227' stroke='%237A1F2B' stroke-width='1.1'/><path d='M130 26C120 24 116 16 118 11C124 13 129 18 130 26ZM130 26C140 24 144 16 142 11C136 13 131 18 130 26Z' fill='%23F4EDE1' stroke='%237A1F2B' stroke-width='1.1'/></svg>") center/260px 30px no-repeat}
+  h3{font-size:20px; margin:26px 0 8px}
+  .tag{font-size:19px; font-style:italic; margin:0 0 14px; text-align:center}
+  section{padding:30px 0 6px}
+  .intro{text-align:center; max-width:720px; margin:0 auto 10px}
+  p{margin:0 0 14px}
+  a{color:var(--kumkum)}
+  code{font:14px/1.4 Consolas,'Courier New',monospace; background:rgba(92,58,33,.09);
+       padding:1px 5px; border-radius:3px}
+  .note{background:linear-gradient(to right,rgba(255,248,235,.5),rgba(255,248,235,0)); border-left:3px solid var(--gold); padding:12px 16px;
+        margin:16px 0; border-radius:0 6px 6px 0; font-size:15.5px}
+  .note.live{border-left-color:var(--kumkum)}
+  ul.pts{padding-left:0; list-style:none; display:grid; gap:10px;
+         grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); margin:14px 0}
+  ul.pts li{background:var(--card); border:1px solid var(--brass); outline:1px solid var(--rule); outline-offset:3px; border-radius:2px; padding:12px 14px; text-align:center}
+  .tablewrap{overflow-x:auto; margin:14px 0; border:1px solid var(--brown); outline:1px solid var(--gold); outline-offset:3px; background:var(--card)}
+  table{border-collapse:collapse; width:100%; font-size:15px}
+  th,td{padding:8px 12px; text-align:left; border-bottom:1px solid var(--rule); vertical-align:top}
+  th{background:rgba(92,58,33,.9); color:var(--ivory); font-weight:normal; letter-spacing:.06em;
+     font-size:13px; text-transform:uppercase; white-space:nowrap}
+  tr:last-child td{border-bottom:0}
+  tr.total td{font-weight:bold; background:rgba(201,162,39,.18)}
+  td.num,th.num{text-align:right; white-space:nowrap}
+  .pill{display:inline-block; padding:1px 9px; border-radius:3px; font-size:12px; letter-spacing:.08em; color:#fff}
+  .active{background:var(--kumkum)} .done{background:var(--brass)} .blocked{background:var(--brown)} .pending{background:#8a7a68}
+  pre{background:rgba(92,58,33,.92); color:var(--ivory); padding:16px 18px; border-radius:6px;
+      overflow-x:auto; font:13.5px/1.5 Consolas,'Courier New',monospace; margin:14px 0}
+  .bar{display:flex; align-items:center; gap:10px}
+  .bar i{display:block; height:9px; border-radius:5px; background:var(--kumkum); min-width:2px}
+  .bar span{font-size:13px}
+  .docs{display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .docs a{display:block; text-decoration:none; background:var(--card); border:1px solid var(--rule);
+          border-radius:6px; padding:12px 14px; color:var(--brown)}
+  .docs a b{display:block; color:var(--kumkum); font-weight:normal; font-size:16px}
+  .docs a:hover{border-color:var(--kumkum)}
+  footer{position:relative; z-index:2; margin-top:46px; padding:0 0 40px; text-align:center; font-size:14px; overflow:hidden}
+  footer > p{margin:0 0 6px; position:relative; z-index:2}
+  .trial{font-size:12px; letter-spacing:.12em; text-transform:uppercase; opacity:.7}
+  @media (max-width:600px){h1{font-size:34px} h2{font-size:24px} body{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="bg"><div class="lotus"></div><div class="lotus2"></div><div class="lotus3"></div><div class="temple"></div></div>
+<div class="frame"><i></i><i></i><i></i><i></i></div>
+
+<header class="hero">
+  <div class="wrap"><img src="assets/swaragam-banner.png" alt="Swaragam banner featuring the Carnatic resonance motif"></div>
+</header>
+
+<nav><div class="wrap">
+  <a href="#what">What it is</a><a href="#status">Research status</a><a href="#pipeline">Pipeline</a>
+  <a href="#results">Results</a><a href="#limits">Limitations</a><a href="#gov">Governance</a><a href="#nav">Navigation</a>
+  <a href="#usage">Usage</a><a href="#docs">Docs</a>
+</div></nav>
+
+<main class="sheet">
+
+<h1>Swaragam</h1>
+<p class="tag">Carnatic raga identification through deterministic signal processing.</p>
+<p class="intro">Swaragam identifies Carnatic ragas from vocal audio using interpretable signal processing and structured statistical modeling, emphasizing explainability, musical grammar, and bias correction over black-box learning.</p>
+
+<section id="what">
+<h2>What Swaragam is</h2>
+<p>A deterministic recognition engine. No neural network, no learned embedding — every decision traces to a measured pitch distribution and a transition matrix.</p>
+<ul class="pts"><li>Relative pitch, not absolute frequency</li><li>Behavioral transitions over scale checklists</li><li>Preserve musical micro-structure</li><li>Vocal-only audio for clean pitch extraction</li></ul>
+<p>All modeling is tonic-normalized (Sa).</p>
+</section>
+
+<section id="status">
+<h2>Research status</h2>
+<p><b>Swaragam is an active research project, not a finished production engine.</b> Accuracy below is a measured baseline, not a product claim.</p>
+<div class="tablewrap"><table>
+<tr>
+<th>Gate</th>
+<th>Question</th>
+<th>Status</th>
+</tr>
+<tr>
+<td>Q-001A</td>
+<td>Is the representation sufficient for Abhogi?</td>
+<td><span class="pill done">ANSWERED</span> adequate; not the bottleneck</td>
+</tr>
+<tr>
+<td>Q-001B</td>
+<td>Do phrase n-grams add power beyond PCD+dyads?</td>
+<td><span class="pill active">ACTIVE</span></td>
+</tr>
+<tr>
+<td>Q-001B-A</td>
+<td>Higher-order structure in Abhogi sequences?</td>
+<td><span class="pill done">COMPLETED</span> INCONCLUSIVE</td>
+</tr>
+<tr>
+<td>Q-001B-B</td>
+<td>Composition-held-out discrimination?</td>
+<td><span class="pill blocked">BLOCKED</span> only 2 compositional units</td>
+</tr>
+<tr>
+<td>Q-002</td>
+<td>Would a phrase model improve recognition?</td>
+<td><span class="pill blocked">BLOCKED BY Q-001B</span></td>
+</tr>
+<tr>
+<td>Q-003</td>
+<td>Is Bhairavi limited by representation or by data?</td>
+<td><span class="pill active">ACTIVE</span> UNANSWERED</td>
+</tr>
+<tr>
+<td>Q-004</td>
+<td>What reproducibility artifact is legally permissible?</td>
+<td><span class="pill pending">PENDING</span></td>
+</tr>
+</table></div>
+<div class="note live"><b>Q-003, the live gate.</b> Phase 1-A eliminated mean-PCD overlap as the mechanism; Phase 1-B localised the failure to the dyad channel; Phase 1-C (complete and independently verified, <code>9b1dd6d</code>) found the dyad channel explains 3 of Bhairavi's 4 UNKNOWNs and <b>0 of its 6 wrong answers</b>, which remain unexplained. Localisation is not a diagnosis — the gate is still open. Record: <a href="https://github.com/Ramki-2010/Swaragam/blob/main/docs/research/Q-003/PHASE_LOG.md" target="_blank" rel="noopener"><code>docs/research/Q-003/PHASE_LOG.md</code></a>.</div>
+</section>
+
+<section id="pipeline">
+<h2>Pipeline</h2>
+<pre>Audio (.wav / .mp3 / .flac)
+  |
+  v
+Vocal Isolation (Saraga multitrack stems or Demucs htdemucs)
+  |
+  v
+Pitch Extraction (pYIN via librosa, 6-min cap)
+  |
+  v
+Tonic (Sa) Estimation (histogram-based, octave-aware)
+  |
+  v
+Pitch Normalization (cents relative to Sa, folded to 0-1200)
+  |
+  v
+Feature Computation
+  |-- PCD: 72-bin pitch class distribution (17 cents per bin)
+  +-- Directional Dyads: ascending (mean_up) + descending (mean_down)
+  |
+  v
+Raga Scoring
+  |-- IDF x Variance weighted dot-product (PCD only)
+  |-- Unweighted dot-product (Dyads; up + down averaged)
+  |-- Weighted fusion (PCD=0.8, Dyad=0.2; uniform for all ragas)
+  |-- MIN_CLIPS_PER_RAGA guardrail (excludes thin-data ragas)
+  +-- Tiered confidence: HIGH / MODERATE / UNKNOWN
+  |
+  v
+Output: { &quot;final&quot;: str, &quot;ranking&quot;: list, &quot;margin&quot;: float, &quot;confidence_tier&quot;: str }</pre>
+</section>
+
+<section id="results">
+<h2>Validated results</h2>
+<p>Uniform PCD=0.8 / Dyad=0.2 for all ragas. Canonical v1.3.2 leave-one-out run (<code>sandbox_loo_v131_canonical.py</code>, 70 clips, 25 correct / 14 wrong / 31 unknown, 64.1% decided).</p>
+<div class="note"><b>Canonical source:</b> <a href="https://github.com/Ramki-2010/Swaragam/blob/main/PROJECT_STATUS.md" target="_blank" rel="noopener"><code>PROJECT_STATUS.md</code></a> -&gt; Current Accuracy. The table below is a summary of it. If the two ever disagree, <code>PROJECT_STATUS.md</code> is correct.</div>
+<div class="tablewrap"><table>
+<tr>
+<th>Raga</th>
+<th class="num">Training Clips</th>
+<th class="num">Correct</th>
+<th class="num">Wrong</th>
+<th class="num">Unknown</th>
+<th>LOO Accuracy (decided)</th>
+</tr>
+<tr>
+<td>Mohanam</td>
+<td class="num">10</td>
+<td class="num">1</td>
+<td class="num">0</td>
+<td class="num">9</td>
+<td><div class="bar"><i style="width:100px"></i><span>100%</span></div></td>
+</tr>
+<tr>
+<td>Saveri</td>
+<td class="num">8</td>
+<td class="num">7</td>
+<td class="num">1</td>
+<td class="num">0</td>
+<td><div class="bar"><i style="width:88px"></i><span>88%</span></div></td>
+</tr>
+<tr>
+<td>Shankarabharanam</td>
+<td class="num">9</td>
+<td class="num">4</td>
+<td class="num">1</td>
+<td class="num">4</td>
+<td><div class="bar"><i style="width:80px"></i><span>80%</span></div></td>
+</tr>
+<tr>
+<td>Kalyani</td>
+<td class="num">14</td>
+<td class="num">6</td>
+<td class="num">2</td>
+<td class="num">6</td>
+<td><div class="bar"><i style="width:75px"></i><span>75%</span></div></td>
+</tr>
+<tr>
+<td>Thodi</td>
+<td class="num">11</td>
+<td class="num">5</td>
+<td class="num">2</td>
+<td class="num">4</td>
+<td><div class="bar"><i style="width:71px"></i><span>71%</span></div></td>
+</tr>
+<tr>
+<td>Abhogi</td>
+<td class="num">7</td>
+<td class="num">1</td>
+<td class="num">2</td>
+<td class="num">4</td>
+<td><div class="bar"><i style="width:33px"></i><span>33%</span></div></td>
+</tr>
+<tr>
+<td>Bhairavi</td>
+<td class="num">11</td>
+<td class="num">1</td>
+<td class="num">6</td>
+<td class="num">4</td>
+<td><div class="bar"><i style="width:14px"></i><span>14%</span></div></td>
+</tr>
+<tr class="total">
+<td><b>TOTAL</b></td>
+<td class="num"><b>70</b></td>
+<td class="num"><b>25</b></td>
+<td class="num"><b>14</b></td>
+<td class="num"><b>31</b></td>
+<td><b>64.1%</b></td>
+</tr>
+</table></div>
+<h3>Staged / excluded ragas</h3>
+<p>"Clips" are distinct eligible source recordings; "Extracted" counts those represented by extracted <code>.npz</code> feature files.</p>
+<div class="tablewrap"><table>
+<tr>
+<th>Raga</th>
+<th class="num">Clips</th>
+<th class="num">Extracted</th>
+<th>Status</th>
+</tr>
+<tr>
+<td>Kamboji</td>
+<td class="num">3</td>
+<td class="num">3</td>
+<td>Needs 2+ real clips (Saraga exhausted)</td>
+</tr>
+<tr>
+<td>Madhyamavati</td>
+<td class="num">2</td>
+<td class="num">2</td>
+<td>Needs 3 more</td>
+</tr>
+<tr>
+<td>Hamsadhvani</td>
+<td class="num">1</td>
+<td class="num">0</td>
+<td>Audio acquired, not yet extracted</td>
+</tr>
+</table></div>
+<h3>Version history</h3>
+<div class="tablewrap"><table>
+<tr>
+<th>Version</th>
+<th class="num">Accuracy</th>
+<th class="num">Ragas</th>
+<th>Key Change</th>
+</tr>
+<tr>
+<td>v1.2</td>
+<td class="num">25%</td>
+<td class="num">3</td>
+<td>Baseline</td>
+</tr>
+<tr>
+<td>v1.2.1</td>
+<td class="num">--</td>
+<td class="num">6</td>
+<td>Vocal isolation, OOD fixed</td>
+</tr>
+<tr>
+<td>v1.2.2</td>
+<td class="num">64%</td>
+<td class="num">6</td>
+<td>ALPHA fix (0.5 to 0.01)</td>
+</tr>
+<tr>
+<td>v1.2.3</td>
+<td class="num">70%</td>
+<td class="num">6</td>
+<td>IDF x Variance scoring</td>
+</tr>
+<tr>
+<td>v1.2.4</td>
+<td class="num">78.6%</td>
+<td class="num">6</td>
+<td>72-bin PCD</td>
+</tr>
+<tr>
+<td>v1.2.5</td>
+<td class="num">72.0%</td>
+<td class="num">6</td>
+<td>Expanded data, dedup, MIN_CLIPS guardrail</td>
+</tr>
+<tr>
+<td>v1.3</td>
+<td class="num">58.8%</td>
+<td class="num">5</td>
+<td>Harikambhoji removed, weights 0.7/0.3, honest baseline</td>
+</tr>
+<tr>
+<td>v1.3.1</td>
+<td class="num">60.5%</td>
+<td class="num">7</td>
+<td>Abhogi+Saveri activated, 0.8/0.2, Bhairavi override (later confirmed counter-productive)</td>
+</tr>
+<tr>
+<td>v1.3.2</td>
+<td class="num">64.1%</td>
+<td class="num">7</td>
+<td>Bhairavi override retired, uniform 0.8/0.2 for all ragas</td>
+</tr>
+</table></div>
+<div class="note"><b>Caveat.</b> Pre-v1.3 figures predate the fabrication audit and are <b>not independently verifiable</b> — historical record, not current accuracy claims. A prior 67.4% figure was found fabricated, its per-raga rows never summing to their stated total, and has been retired from all documentation. Only the v1.3.2 row is canonical.</div>
+</section>
+
+<section id="limits">
+<h2>Methodology and limitations</h2>
+<div class="note">This section exists because the project treats limitations as results.</div>
+<ul><li><b>Abhogi 33%</b> — structural, not tunable. A janya of Kalyani whose PCD is a strict subset; weight overrides (L-044) and energy-ratio scoring (L-050) were both tested and rejected.</li><li><b>Bhairavi 14%</b> — cause <b>UNPROVEN</b>; representation versus dataset diversity is untested, and "more clips" is a hypothesis, not a confirmed diagnosis. <i>(Correction 2026-08-25: this previously read "needs diverse clips". The 14% is FACT; "needs diverse clips" was a HYPOTHESIS stated as a fact.)</i></li><li><b>Mohanam 100% decided, but 9 of 10 UNKNOWN</b> — the model barely commits.</li><li><b>Kamboji excluded</b> — 3 real clips, Saraga exhausted, 0 new sources.</li><li><b>Saveri is the current error sink</b> — 8 of 14 wrong answers land there.</li><li><b>No OOD score floor.</b></li><li><b>ADR-016 is unmet</b> — no <code>benchmark.py</code> and no bundled evaluation data, so the one-command reproducibility standard remains aspirational.</li></ul>
+</section>
+
+<section id="gov">
+<h2>Research governance</h2>
+<p>The project is run as a research record first. Documents have a fixed order of authority, and a result is never promoted past what the experiment shows.</p>
+<ul class="pts">
+  <li><b>Source of truth</b><br>CLAUDE.md, then PROJECT_STATUS.md, the active research plan, phase logs, ADRs, artifacts</li>
+  <li><b>Frozen decisions</b><br>Hypotheses, thresholds, seeds and datasets change by decision, never by inference</li>
+  <li><b>Phase gating</b><br>A finished experiment is not approval for the next phase</li>
+  <li><b>Pre-commit audit</b><br>A repository hook checks staged Python before every commit</li>
+</ul>
+<h3>Research Review Board</h3>
+<p>An on-demand panel for hard research questions (ADR-019, ADR-020, ADR-021). Each run assembles six perspectives chosen for that problem and runs them as separate read-only reviewers over a shared evidence brief that they must challenge. The Board is advisory: it cannot advance a phase, authorise an experiment or change code, data or results.</p>
+<p>Lesson L-055 records why it is built this way: reviewers reading the same data are not independent evidence, so findings are counted by their underlying source. Each run leaves a minimized, hashed audit package in a local archive that is never committed. A provenance ledger in the repository records that a run happened, by hash. It has no entries yet; earlier runs are not backfilled.</p>
+</section>
+
+<section id="nav">
+<h2>Repository navigation</h2>
+<pre>scripts/            Active v1.3.2 pipeline, sandbox experiments, archive/
+datasets/           Seed corpus, staging, source datasets
+docs/               START_HERE.md, ARCHITECTURE.md, research/, assets/, audits
+notebooks/          Exploratory notebooks
+archive/            Retired material
+.ai/                Agent specification
+.ai-memory/         Project memory (bugs, lessons, architecture, datasets)
+.githooks/          Pre-commit audit hooks
+
+CLAUDE.md           Governance, working rules, environment
+PROJECT_STATUS.md   Canonical current state, gates, baseline
+adr.md              Architecture decision records
+DEVELOPMENT.md      Development loop and sandbox-first rule
+CONTRIBUTING.md     Contribution guidelines
+requirements.txt    Python dependencies</pre>
+<div class="tablewrap"><table>
+<tr>
+<th>Read</th>
+<th>For</th>
+</tr>
+<tr>
+<td><a href="https://github.com/Ramki-2010/Swaragam/blob/main/docs/START_HERE.md" target="_blank" rel="noopener"><code>docs/START_HERE.md</code></a></td>
+<td>Navigation and the source-of-truth hierarchy</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ramki-2010/Swaragam/blob/main/PROJECT_STATUS.md" target="_blank" rel="noopener"><code>PROJECT_STATUS.md</code></a></td>
+<td>Canonical current state, gates, accuracy</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ramki-2010/Swaragam/blob/main/docs/ARCHITECTURE.md" target="_blank" rel="noopener"><code>docs/ARCHITECTURE.md</code></a></td>
+<td>Stable conceptual architecture</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ramki-2010/Swaragam/blob/main/adr.md" target="_blank" rel="noopener"><code>adr.md</code></a></td>
+<td>Settled decisions (ADR-001 through ADR-018)</td>
+</tr>
+</table></div>
+</section>
+
+<section id="usage">
+<h2>Installation and usage</h2>
+<pre>pip install -r requirements.txt</pre>
+<p>Use the project virtual environment — the bare <code>python</code> on PATH is a separate install without numpy and will fail.</p>
+<pre>my_virtual_env_swarag\Scripts\python.exe scripts\extract_pitch_batch_v12.py   :: 1. Extract features
+my_virtual_env_swarag\Scripts\python.exe scripts\aggregate_all_v12.py         :: 2. Build models
+my_virtual_env_swarag\Scripts\python.exe scripts\batch_evaluate.py            :: 3. Evaluate</pre>
+<p>Run from the repository root. The scripts resolve data paths absolutely, so the working directory does not matter, but the interpreter does.</p>
+</section>
+
+<section id="docs">
+<h2>Research documentation</h2>
+<p>Research reasoning is not duplicated here — follow the links.</p>
+<div class="tablewrap"><table>
+<tr>
+<th>Document</th>
+<th>Contains</th>
+</tr>
+<tr>
+<td><a href="https://github.com/Ramki-2010/Swaragam/blob/main/docs/research/Q-003/PHASE_LOG.md" target="_blank" rel="noopener"><code>docs/research/Q-003/PHASE_LOG.md</code></a></td>
+<td>Active gate's detailed phase record, append-only</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ramki-2010/Swaragam/blob/main/docs/research/Q-003/RESEARCH_PLAN.md" target="_blank" rel="noopener"><code>docs/research/Q-003/RESEARCH_PLAN.md</code></a></td>
+<td>Methodology for the active gate's next phase</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Ramki-2010/Swaragam/blob/main/docs/repository-consistency-audit.md" target="_blank" rel="noopener"><code>docs/repository-consistency-audit.md</code></a></td>
+<td>Latest repository consistency audit</td>
+</tr>
+</table></div>
+</section>
+
+<section id="dev">
+<h2>Development and contributing</h2>
+<p>See <a href="https://github.com/Ramki-2010/Swaragam/blob/main/DEVELOPMENT.md" target="_blank" rel="noopener">DEVELOPMENT.md</a> for the development loop and sandbox-first rule, and <a href="https://github.com/Ramki-2010/Swaragam/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener">CONTRIBUTING.md</a> for contribution guidelines.</p>
+</section>
+
+<section id="license">
+<h2>License</h2>
+<p>MIT License -- see <a href="https://github.com/Ramki-2010/Swaragam/blob/main/LICENSE" target="_blank" rel="noopener">LICENSE</a>.</p>
+</section>
+
+</main>
+
+<footer>
+  <p>Generated from the repository README<br><span class="trial">README.md and PROJECT_STATUS.md remain the sources of truth</span></p>
+</footer>
+
+</body>
+</html>
