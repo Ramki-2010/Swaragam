@@ -45,7 +45,7 @@ renamed.** They are identifiers, not labels:
 
 | Identifier | Value | Why frozen |
 |---|---|---|
-| GitHub repository slug | `swarag` (`github.com/Ramki-2010/swarag`) | Renaming invalidates every documented clone command |
+| GitHub repository slug | `Swaragam` (`github.com/Ramki-2010/Swaragam`) | Renamed from `swarag` by the user (2026-10); use only the new name in commits, lookups and research |
 | Virtual environment | `my_virtual_env_swarag` | See §9 -- never create another environment |
 | Continue slash commands | `/analyze-swarag`, `/debug-swarag` | Must match the live commands in `~/.continue/prompts/` |
 | Filesystem root | `D:\Swaragam` | Hardcoded in 66 scripts; already spelled `Swaragam` |
