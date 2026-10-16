@@ -4,15 +4,9 @@
 Swaragam identifies Carnatic ragas from vocal audio using interpretable signal processing and structured
 statistical modeling, emphasizing explainability, musical grammar, and bias correction over black-box learning.
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/swaragam-motif-dark.svg">
-  <img src="docs/assets/swaragam-motif-light.svg" alt="Swaragam — a string meeting a jivari bridge, resolving into spectral partials and swara notation">
-</picture>
-
-[![Research](https://img.shields.io/badge/Research-active-7A1F2B?style=flat-square&labelColor=5C3A21)](PROJECT_STATUS.md)
-[![Version](https://img.shields.io/badge/Version-v1.3.2-8B6914?style=flat-square&labelColor=5C3A21)](PROJECT_STATUS.md)
-[![Approach](https://img.shields.io/badge/Approach-deterministic%20DSP-7A1F2B?style=flat-square&labelColor=5C3A21)](adr.md)
-[![License](https://img.shields.io/badge/License-MIT-C9A227?style=flat-square&labelColor=5C3A21)](LICENSE)
+<p align="center">
+  <img src="docs/assets/swaragam-banner.png" alt="Swaragam — Carnatic music, research, and technology banner">
+</p>
 
 > **On the name.** The project is **Swaragam**. The repository slug, the virtual environment
 > (`my_virtual_env_swarag`) and several tooling identifiers keep the earlier `swarag` spelling — frozen
