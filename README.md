@@ -8,10 +8,6 @@ statistical modeling, emphasizing explainability, musical grammar, and bias corr
   <img src="docs/assets/swaragam-banner.png" alt="Swaragam banner featuring the Carnatic resonance motif">
 </p>
 
-> **On the name.** The project is **Swaragam**. The repository slug, the virtual environment
-> (`my_virtual_env_swarag`) and several tooling identifiers keep the earlier `swarag` spelling — frozen
-> technical identifiers, not labels, whose renaming would invalidate documented commands. See `CLAUDE.md` §1a.
-
 ## What Swaragam is
 A deterministic recognition engine. No neural network, no learned embedding —
 every decision traces to a measured pitch distribution and a transition matrix.
