@@ -32,6 +32,7 @@ my_virtual_env_swarag/
 my_virtual_env_swarag.RETIRED_*/
 myenv/
 demucs_env/
+demucs_env.RETIRED_*/
 
 # ========================
 # RESEARCH / DOC FILES

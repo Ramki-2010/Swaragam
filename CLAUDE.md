@@ -213,7 +213,7 @@ virtual environment without authorisation.
 Canonical interpreter:
 
 ```
-D:\Swaragam\my_virtual_env_swarag\Scripts\python.exe    # numpy 2.2.6, librosa 0.11.0
+D:\Swaragam\my_virtual_env_swarag\Scripts\python.exe    # Python 3.14.7, numpy 2.3.2, scipy 1.16.1, librosa 0.11.0
 ```
 
 Notes verified in-repo:
@@ -223,6 +223,20 @@ Notes verified in-repo:
   because it was no longer required by active Swarag workflows. Its 77-package
   manifest is preserved at `docs/retired_scripts_venv_packages.txt`. Deletion is
   a separate future decision. **Do not create a third environment.**
+- **Python 3.10 -> 3.14 migration (2026-10-21).** Python 3.10 reached end of life
+  on 2026-10-01 (devguide.python.org/versions). Both environments were rebuilt on
+  Python 3.14.7 under their **original names**: `my_virtual_env_swarag` and
+  `demucs_env` (vocal isolation; `scripts/run_demucs_batch.py` points at it).
+  The 3.10 originals were renamed, **not deleted**, as
+  `my_virtual_env_swarag.RETIRED_PY310_20261021` and
+  `demucs_env.RETIRED_PY310_20261021`; deletion is a separate future decision.
+  Versions that changed: numpy 2.2.6 -> 2.3.2, scipy 1.15.3 -> 1.16.1,
+  contourpy 1.3.2 -> 1.3.3; added for 3.13+: `audioop-lts`, `standard-aifc`,
+  `standard-chunk`, `standard-sunau`. `demucs_env` changed only numpy (2.3.2)
+  and setuptools (81.0.0); torch stays 2.11.0+cu128. Observed fact: feature
+  extraction (`f0`, `voiced_flag`, `cents_gated`, `sa_hz`, `gating_ratio`) was
+  bit-identical between 3.10 and 3.14 on 6 files across 6 ragas -- a sample, not
+  proof for the full dataset. **Do not create a third environment.**
 - The bare `python` on PATH is a separate install **without numpy** and will fail.
 - Add `PYTHONIOENCODING=utf-8` when output may contain non-ASCII — Saraga metadata
   carries transliterated raga names (e.g. `Ābhōgi`) and cp1252 raises
