@@ -1,5 +1,6 @@
 # Swarag v1.3 -- Python Dependencies
 # Install: pip install -r requirements.txt
+# Tested on Python 3.14.7 (numpy 2.3.2, scipy 1.16.1); see CLAUDE.md section 9.
 
 # Core pipeline
 numpy>=1.23

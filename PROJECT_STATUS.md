@@ -72,6 +72,19 @@ every phrase-based accuracy fix).
   (Bhairavi override) actually scores 60.5% overall.
 - New canonical: 64.1% decided (25c/14w/31u)
 
+### Runtime Environment
+Environment details live in [`CLAUDE.md`](CLAUDE.md) section 9; this is state only.
+
+- Both environments (`my_virtual_env_swarag`, `demucs_env`) run **Python 3.14.7**
+  since 2026-10-21 (3.10 reached end of life 2026-10-01). The 3.10 originals are
+  retained as `*.RETIRED_PY310_20261021`.
+- Verified on 3.14 (samples only, not the full dataset): feature extraction on
+  6 files and `recognize_raga` outputs on 6 files were identical to 3.10; a 20 s
+  Demucs two-stem separation ran. This checks 3.14 against 3.10, not accuracy.
+- **Not yet verified on 3.14:** aggregation, batch evaluation, the full
+  `run_demucs_batch.py` run. The 64.1% baseline above predates the migration and
+  has not been re-measured on 3.14.
+
 ---
 
 ## Known Limitations

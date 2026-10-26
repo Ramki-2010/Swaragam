@@ -799,3 +799,25 @@
   unchallenged into every reviewer's conclusions, and safety depends on each
   agent following its instructions. Applied in ADR-019 and the
   `/review-board` procedure.
+
+### L-056: Wheel Availability Is Not Compatibility -- and an Old-vs-New Comparison Must Assert Its Inputs Are Non-Empty
+- **Date**: 2026-10-21
+- **Context**: Moving both environments from Python 3.10 to 3.14. Pinned
+  numpy 2.2.6 and scipy 1.15.3 had no cp314 wheels (first available: numpy
+  2.3.2, scipy 1.16.1); contourpy 1.3.2 failed to build from source. The
+  3.10 freeze also hid dependencies that only exist on 3.13+
+  (`standard-aifc`, `standard-chunk`, `standard-sunau`, `audioop-lts`) and a
+  `setuptools<82` bound from torch. A `pip download` check that used a
+  non-existent `--dry-run` flag reported "no wheel" for every package, which
+  was an artefact of the command, not evidence. The first old-vs-new
+  recognition comparison used the wrong aggregation folder: both
+  interpreters loaded 0 models and returned identical UNKNOWN results.
+- **Rule**: Resolve the full dependency set with the installer (`pip install
+  --dry-run --report`, `pip check`) rather than inferring from a pinned
+  list. A tool that errors uniformly is not a measurement. Any
+  old-versus-new comparison must assert that its inputs are non-trivial
+  (here: `assert models`) before "identical" counts as evidence.
+- **Impact**: Identical outputs from two empty runs would have passed as
+  "3.14 reproduces 3.10". The corrected run loaded 7 models and was
+  identical on 6 files -- a sample, not a full-dataset proof. Recorded in
+  CLAUDE.md section 9 and PROJECT_STATUS.md (Runtime Environment).
