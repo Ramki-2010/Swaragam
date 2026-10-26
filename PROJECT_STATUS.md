@@ -81,6 +81,9 @@ Environment details live in [`CLAUDE.md`](CLAUDE.md) section 9; this is state on
 - Verified on 3.14 (samples only, not the full dataset): feature extraction on
   6 files and `recognize_raga` outputs on 6 files were identical to 3.10; a 20 s
   Demucs two-stem separation ran. This checks 3.14 against 3.10, not accuracy.
+- ADR-017 cache `--validate` re-run on 3.14 (2026-10-26): 29 clips, 0
+  mismatches, maxdiff 0 (record: `docs/validation/`); the rest of the cache is
+  unvalidated, as before.
 - **Not yet verified on 3.14:** aggregation, batch evaluation, the full
   `run_demucs_batch.py` run. The 64.1% baseline above predates the migration and
   has not been re-measured on 3.14.

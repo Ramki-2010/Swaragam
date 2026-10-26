@@ -262,7 +262,27 @@ already made and evidenced elsewhere in the memory files. Generated
   cache presence is not cache validation, and the proven-faithful scope is
   the 30 clips actually run through `--validate`, not the directory as a whole.
 - **Status**: ACTIVE.
-- **Source**: L-051, L-053, ADR-015 (single-source discipline).
+- **Update (2026-10-26) -- platform decision: Python and library stack
+  changed; ADR-017 validation re-run on it.** Python 3.10 reached end of
+  life on 2026-10-01, so both environments (`my_virtual_env_swarag`,
+  `demucs_env`) were rebuilt on Python 3.14.7 on 2026-10-21 (commits `1fa837d`,
+  `23c514f`; details in CLAUDE.md section 9). Changed: Python 3.10.11 ->
+  3.14.7, numpy 2.2.6 -> 2.3.2, scipy 1.15.3 -> 1.16.1, contourpy 1.3.2 ->
+  1.3.3. Unchanged: librosa 0.11.0, numba 0.68.0, torch 2.11.0+cu128, demucs
+  4.1.0. The original 30-clip `--validate` result above (L-051) was obtained
+  on the prior stack and was **not updated to these versions**. Per decision
+  1 it was therefore re-run on the new stack on 2026-10-26: 29 clips
+  validated, 1 skipped (no cache entry), 0 mismatches, f0 maxdiff 0.00e+00 on
+  all 29, metrics identical. The cache is faithful under Python 3.14.7 /
+  numpy 2.3.2 / scipy 1.16.1 **for those 29 clips** (Abhogi, Kalyani,
+  Shankarabharanam folders) -- the same scope limit as above; the rest of
+  `features_v12/` remains unvalidated. Run record and provenance:
+  `docs/validation/q001a_cache_validation_py314_20261026.log`. Note: the script
+  compares f0 with `np.allclose`, not exact equality; the observed maxdiff of
+  exactly 0 means equality was exact in this run. Earlier spot checks (6 files,
+  3.10 vs 3.14, extraction and `recognize_raga`) were identical as well. The
+  original text above is unchanged.
+- **Source**: L-051, L-053, ADR-015 (single-source discipline); L-056.
 
 ### ADR-018: Adoption of Phrase Evaluation Protocol v1.0
 - **Context**: Q-001A's representation-sufficiency result (n=7, permutation

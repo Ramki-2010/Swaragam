@@ -1,0 +1,48 @@
+# Q-001A cache validation (ADR-017 decision 1) -- re-run on the Python 3.14 stack
+# Run date      : 2026-10-26
+# Git commit    : 23c514f (working tree: adr.md modified only; scripts clean)
+# Script        : scripts/sandbox_q001a_representation_sufficiency.py (blob 16cbd9efdee9b046efdcd150b031da187450a31b)
+# Command       : cd scripts && ..\my_virtual_env_swarag\Scripts\python.exe sandbox_q001a_representation_sufficiency.py ..\datasets\seed_carnatic --feature-dir ..\pcd_results\features_v12 --validate
+# Environment   : Python 3.14.7, numpy 2.3.2, scipy 1.16.1, librosa 0.11.0 (my_virtual_env_swarag)
+# FEATURE_VERSION: v1.2
+# Result        : 29 validated, 1 without cache (skipped), 0 mismatches; every clip f0_equal=True, maxdiff=0.00e+00, metrics_equal=True
+# Note          : the script compares f0 with np.allclose (tolerance); all 29 maxdiffs are exactly 0, so equality was exact in this run.
+# ---------------------------------------------------------------------------
+VALIDATION MODE -- cached f0 vs live pyin (metrics must be identical)
+
+  [OK  ] Kalyani/223586__gopalkoduri__carnatic-varnam-by-badrinarayanan-in-kalyani-raaga.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/223587__gopalkoduri__carnatic-varnam-by-prasanna-in-kalyani-raaga.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/223588__gopalkoduri__carnatic-varnam-by-ramakrishnamurthy-in-kalyani-raaga.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/223589__gopalkoduri__carnatic-varnam-by-vignesh-in-kalyani-raaga.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/Kalyani_clean_1.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/Kalyani_clean_2.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/Kalyani_clean_3.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/Kalyani_clean_4.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/Kalyani_clean_6.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/Kannanai Paadu Maname.vocal.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/Sanjay Subrahmanyan - Paarengum.vocal.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/Sanjay Subrahmanyan - Vanajakshi - Varnam.vocal.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/Sundari Nee Divya.vocal.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Kalyani/kalyani_clean_5.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Shankarabharanam/Sanjay Subrahmanyan - Pullum Silambena Kan.vocal.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Shankarabharanam/Sanjay Subrahmanyan - Undan Paada Pankayam.vocal.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Shankarabharanam/Shankarabharanam_1.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Shankarabharanam/Shankarabharanam_2.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Shankarabharanam/Shankarabharanam_3.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Shankarabharanam/Shankarabharanam_4.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Shankarabharanam/Shankarabharanam_5.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Shankarabharanam/Shankarabharanam_6.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Shankarabharanam/Vara Leela Gana Lola.vocal.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Abhogi/223578__gopalkoduri__carnatic-varnam-by-dharini-in-abhogi-raaga.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Abhogi/223579__gopalkoduri__carnatic-varnam-by-prasanna-in-abhogi-raaga.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Abhogi/223580__gopalkoduri__carnatic-varnam-by-ramakrishnamurthy-in-abhogi-raaga.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Abhogi/223581__gopalkoduri__carnatic-varnam-by-sreevidya-in-abhogi-raaga.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  [OK  ] Abhogi/223582__gopalkoduri__carnatic-varnam-by-vignesh-in-abhogi-raaga.mp3  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+  Abhogi/Nannu Brova Neeku.demucs-vocal.wav: no cache -- skipped
+  [OK  ] Abhogi/Vignesh Ishwar - Evvari Bodhana.demucs-vocal.wav  f0_equal=True maxdiff=0.00e+00  metrics_equal=True
+
+================================================================
+validated 29 clips | 1 without cache | mismatches: 0
+RESULT: cache is a faithful substitute -- metrics identical. Safe to use.
+================================================================
+exit=0
