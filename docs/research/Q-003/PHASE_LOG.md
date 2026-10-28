@@ -629,3 +629,66 @@ written per the append-only rule.
 **Where the current design lives.** `docs/research/Q-003/RESEARCH_PLAN.md`.
 That file supersedes the C1/C2/C3 sketch quoted above. **Phase 1-D remains
 NOT AUTHORISED and NOT EXECUTED.**
+
+---
+
+## Dhaivatam D1-vs-D2 mass check (2026-10-28)
+
+**Status.** Diagnostic only. **This is not Phase 1-D.** Phase 1-D remains NOT
+AUTHORISED and NOT EXECUTED; this entry authorises no further phase (§17a).
+
+**Hypothesis (unverified; premise from an external report, not the repo).**
+Bhairavi PCD mass in the dhaivatam region(s) differs from Saveri's and Thodi's
+in a way that separates the ragas.
+
+**Pre-registration** (fixed in the script header before any PCD value was
+inspected; script `scripts/sandbox_q003_dhaivatam_mass.py`, sha1
+`e5b33bd1a10575246e3188589c68789b0abb0ca1`, run on commit `a853768`, Python
+3.14.7, numpy 2.3.2):
+
+- Population: `features_v12`, v1.2, gating ≥ 0.05, ≥ 200 frames. Bhairavi 11,
+  Saveri 8, Thodi 11 (asserted).
+- Windows (author's proposal, approved by the user; not repo-sourced): D1
+  770–830 c, D2 870–930 c; bin included iff its centre lies in the window ⇒ D1 =
+  bins 46–49, D2 = bins 52–55 (asserted).
+- Per clip: D1, D2 = summed PCD mass; R = D2 / (D1 + D2).
+- Sa-soundness precondition: Sa window (bins 70, 71, 0, 1) ranks in the top 3 of
+  18 non-overlapping 4-bin windows; pass iff ≥ 80 % of clips in every raga.
+- Test: two-sided Mann–Whitney U, rank-biserial r (r > 0 ⇒ Bhairavi higher).
+  Criterion: |r| ≥ 0.5 in the same direction against **both** Saveri and Thodi
+  on R; otherwise INCONCLUSIVE. |r| ≥ 0.5 is a pre-registered diagnostic
+  threshold, not proof of separation.
+
+**Results** (read from `Q003 Bhairavi Diagnosis results/dhaivatam_mass_20261028_123510/summary.txt`, gitignored):
+
+| | Bhairavi vs Saveri | Bhairavi vs Thodi |
+|---|---|---|
+| R: U, p, r | 22.0, 0.0754, **−0.500** | 82.0, 0.1713, **+0.355** |
+| D1: U, p, r | 70.0, 0.0328, +0.591 | 14.0, 0.0014, −0.769 |
+| D2: U, p, r | 37.0, 0.5999, −0.159 | 26.0, 0.0233, −0.570 |
+
+Precondition: PASS (Sa window in top 3 for 11/11, 8/8, 11/11 clips).
+Per-raga medians (D1 / D2 / R): Bhairavi 0.0269 / 0.0189 / 0.4125; Saveri
+0.0137 / 0.0276 / 0.7324 (R range 0.046–0.934); Thodi 0.0629 / 0.0337 / 0.3793.
+
+**Verdict on the pre-registered criterion: INCONCLUSIVE.** On R the effect is
+−0.500 against Saveri and +0.355 against Thodi — opposite directions, so the
+"same direction against both" condition fails.
+
+**Interpretation limits (labelled).**
+- *Observed fact:* the numbers above. The D1 and D2 mass comparisons are
+  descriptive and were not part of the pass/fail criterion; they were not
+  corrected for multiple comparisons.
+- *Statistical inference:* no consistent R separation of Bhairavi from both
+  comparators at n = 8–11. Saveri's R spans nearly the whole [0, 1] range, which
+  is a wide spread, not evidence for any mechanism.
+- *Not established:* any musicological claim about Bhairavi's D1/D2 usage; any
+  cause of Bhairavi's recognition failures. A null/inconclusive result does not
+  prove absence at this n. ADR-005 is unaffected.
+
+**Implementation note.** `scipy.stats` could not be imported in the Python 3.14
+environment: Windows Application Control blocked
+`scipy.sparse.csgraph._min_spanning_tree` ("An Application Control policy has
+blocked this file"). The script therefore uses its own exact permutation
+Mann–Whitney (checked on 3-vs-3 cases: U = 0, p = 0.1, r = −1). Whether other
+scipy submodules are affected is not established. Reported, not worked around.
