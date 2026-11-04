@@ -213,7 +213,7 @@ virtual environment without authorisation.
 Canonical interpreter:
 
 ```
-D:\Swaragam\my_virtual_env_swarag\Scripts\python.exe    # Python 3.14.7, numpy 2.3.2, scipy 1.16.1, librosa 0.11.0
+D:\Swaragam\my_virtual_env_swarag\Scripts\python.exe    # Python 3.14.x (3.14.7 on 2026-10-21; 3.14.10 on the F15, see below), numpy 2.3.2, scipy 1.16.1, librosa 0.11.0
 ```
 
 Notes verified in-repo:
@@ -237,6 +237,21 @@ Notes verified in-repo:
   extraction (`f0`, `voiced_flag`, `cents_gated`, `sa_hz`, `gating_ratio`) was
   bit-identical between 3.10 and 3.14 on 6 files across 6 ragas -- a sample, not
   proof for the full dataset. **Do not create a third environment.**
+- **Rebuild on the ASUS TUF Dash F15 (2026-11-04).** After a Windows reinstall of
+  the F15 (host `LAPTOP-ARE53VOA`, RTX 3060 Laptop), `D:\Swaragam` was restored
+  from a file backup of 2026-11-02. That clone was stale: HEAD `e586c2f`
+  (2026-09-07), 13 commits behind `origin/main`, with the pre-migration Python
+  3.10 stack and venvs that had lost their binaries (the backup excluded
+  .exe/.dll). The clone was fast-forwarded to `a853768`, and both environments
+  were rebuilt under their original names on **Python 3.14.10** (the installed
+  3.14 patch; the repo records 3.14.7) with the versions above. Python 3.10
+  environments built from the backup before the migration was found were renamed
+  `my_virtual_env_swarag.RETIRED_PY310_20261104` (complete 3.10 stack) and
+  `demucs_env.RETIRED_PY310_20261104` (incomplete). The binary-less originals were
+  `*.BROKEN_NO_BINARIES_20261104`: the 1.09 GB `demucs_env` one was deleted (the
+  backup keeps the original); the 330 MB `my_virtual_env_swarag` one remains and
+  is git-ignored. The F15 was previously the old "backend" laptop; the 3.14
+  migration itself was done elsewhere (INFERENCE: the other laptop).
 - The bare `python` on PATH is a separate install **without numpy** and will fail.
 - Add `PYTHONIOENCODING=utf-8` when output may contain non-ASCII — Saraga metadata
   carries transliterated raga names (e.g. `Ābhōgi`) and cp1252 raises

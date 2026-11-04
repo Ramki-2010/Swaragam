@@ -84,6 +84,19 @@ Environment details live in [`CLAUDE.md`](CLAUDE.md) section 9; this is state on
 - ADR-017 cache `--validate` re-run on 3.14 (2026-10-26): 29 clips, 0
   mismatches, maxdiff 0 (record: `docs/validation/`); the rest of the cache is
   unvalidated, as before.
+- F15 laptop rebuilt 2026-11-04 (details: CLAUDE.md section 9): both environments
+  on **Python 3.14.10**. Checked there: every installed package (44 and 32) has a
+  cp314, abi3 or pure-Python wheel; `pip check` clean in both; torch
+  2.11.0+cu128 sees the RTX 3060 and runs a GPU matmul; ADR-017 `--validate` on
+  2 clips (committed script version): 0 mismatches, maxdiff 0, run not saved
+  under `docs/validation/`. Not checked on 3.14.10: the other 27 clips, Demucs
+  separation, aggregation, batch evaluation.
+- **Uncommitted working-tree change:** `scripts/sandbox_q001a_representation_sufficiency.py`
+  (edited 2026-11-01) did not compile (`IndentationError`, line 227: a de-indented
+  block in `run()`). Repaired 2026-11-04 by re-indenting that block only; the
+  repaired file behaves like the committed version (`results_dir` renamed
+  `RESULTS_DIR`, one comment added). Not committed. The broken copy is kept
+  outside the repo (`C:\restore_tools\wip_backup\`).
 - **Not yet verified on 3.14:** aggregation, batch evaluation, the full
   `run_demucs_batch.py` run. The 64.1% baseline above predates the migration and
   has not been re-measured on 3.14.

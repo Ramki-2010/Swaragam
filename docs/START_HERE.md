@@ -45,7 +45,11 @@ Two standing qualifications:
    blockers, immediate priorities.
 3. **Git state** — `git status`, `git log --oneline -20`. Never assume the
    documentation is current, and never assume an experiment has or has not run;
-   check the artifacts on disk and the history (`CLAUDE.md` §2).
+   check the artifacts on disk and the history (`CLAUDE.md` §2). After a
+   restore, a copy or a machine change, also `git fetch` and compare with
+   `origin/main` (`git rev-list --left-right --count HEAD...origin/main`): a
+   local clone can be many commits behind, and its documents then describe an
+   older state (L-057).
 4. **Identify the active research gate** from `PROJECT_STATUS.md` → Research
    Gates. Do not infer the active gate from conversation or from this file.
 5. **Read that gate's research plan**, if one exists.

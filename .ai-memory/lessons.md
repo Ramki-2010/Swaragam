@@ -821,3 +821,22 @@
   "3.14 reproduces 3.10". The corrected run loaded 7 models and was
   identical on 6 files -- a sample, not a full-dataset proof. Recorded in
   CLAUDE.md section 9 and PROJECT_STATUS.md (Runtime Environment).
+
+### L-057: A Restored Clone Is a Snapshot -- Compare It With origin Before Trusting Its Documents
+- **Date**: 2026-11-04
+- **Context**: `D:\Swaragam` was restored from a file backup after a Windows
+  reinstall. Its documents and environments all described the Python 3.10 state
+  (HEAD `e586c2f`, 2026-09-07), and a first conclusion that "there is no sign of
+  a Python 3.14 move" was drawn from them. `git fetch` showed 13 commits not in the
+  clone, including the 2026-10-21 migration to Python 3.14.7 (`1fa837d`) and
+  ADR-017's platform decision; the migration had been done on another machine.
+  The user's recollection of the move was right, and a 3.10 stack had already been
+  rebuilt from the stale pins before the fetch.
+- **Rule**: After any restore, copy or machine change, run `git fetch` and compare
+  with `origin/main` before reading or acting on local documents or environments.
+  Absence of evidence in a local clone is not evidence of absence. A backup that
+  excludes executables also leaves environments unusable, so rebuild them from the
+  documented stack, not from the stale files.
+- **Impact**: The stale conclusion contradicted the project record and the 3.10
+  rebuild had to be retired. Recorded in `docs/START_HERE.md` (reading order step
+  3) and CLAUDE.md section 9.
