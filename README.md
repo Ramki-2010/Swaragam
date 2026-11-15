@@ -37,7 +37,8 @@ All modeling is tonic-normalized (Sa).
 > **Q-003, the live gate.** Phase 1-A eliminated mean-PCD overlap as the mechanism; Phase 1-B localised the
 > failure to the dyad channel; Phase 1-C (complete and independently verified, `9b1dd6d`) found the dyad channel
 > explains 3 of Bhairavi's 4 UNKNOWNs and **0 of its 6 wrong answers**, which remain unexplained. Localisation is
-> not a diagnosis — the gate is still open. Record:
+> not a diagnosis — the gate is still open. Phase 1-D is designed and design-audited but **not authorised and not
+> executed** (pre-registration: [`docs/research/Q-003/RESEARCH_PLAN.md`](docs/research/Q-003/RESEARCH_PLAN.md)). Record:
 > [`docs/research/Q-003/PHASE_LOG.md`](docs/research/Q-003/PHASE_LOG.md).
 
 ## Pipeline
@@ -158,7 +159,7 @@ requirements.txt    Python dependencies
 | [`docs/START_HERE.md`](docs/START_HERE.md) | Navigation and the source-of-truth hierarchy |
 | [`PROJECT_STATUS.md`](PROJECT_STATUS.md) | Canonical current state, gates, accuracy |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Stable conceptual architecture |
-| [`adr.md`](adr.md) | Settled decisions (ADR-001 through ADR-018) |
+| [`adr.md`](adr.md) | Settled decisions (ADR-001 through ADR-021) |
 
 ## Installation and usage
 ```bash
