@@ -256,6 +256,10 @@ Notes verified in-repo:
 - Add `PYTHONIOENCODING=utf-8` when output may contain non-ASCII — Saraga metadata
   carries transliterated raga names (e.g. `Ābhōgi`) and cp1252 raises
   `UnicodeEncodeError`.
+- `import scipy.stats` fails on the AR_1309 clone: Windows Application Control
+  blocks a scipy DLL (state and detail: `PROJECT_STATUS.md` Runtime Environment).
+  Do not assume `scipy.stats` is usable; check before relying on it, and record
+  a block rather than working around it.
 
 Verify the interpreter before consequential execution. Do not change environment
 silently.
