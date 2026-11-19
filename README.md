@@ -37,8 +37,9 @@ All modeling is tonic-normalized (Sa).
 > **Q-003, the live gate.** Phase 1-A eliminated mean-PCD overlap as the mechanism; Phase 1-B localised the
 > failure to the dyad channel; Phase 1-C (complete and independently verified, `9b1dd6d`) found the dyad channel
 > explains 3 of Bhairavi's 4 UNKNOWNs and **0 of its 6 wrong answers**, which remain unexplained. Localisation is
-> not a diagnosis — the gate is still open. Phase 1-D is designed and design-audited but **not authorised and not
-> executed** (pre-registration: [`docs/research/Q-003/RESEARCH_PLAN.md`](docs/research/Q-003/RESEARCH_PLAN.md)). Record:
+> not a diagnosis — the gate is still open. Phase 1-D has **been executed** (2026-11-19): matched-influence
+> normalised dyads turned three of Bhairavi's wrong answers into UNKNOWN and none into correct, so the gate
+> is still open and nothing is diagnosed (pre-registration: [`docs/research/Q-003/RESEARCH_PLAN.md`](docs/research/Q-003/RESEARCH_PLAN.md)). Record:
 > [`docs/research/Q-003/PHASE_LOG.md`](docs/research/Q-003/PHASE_LOG.md).
 
 ## Pipeline

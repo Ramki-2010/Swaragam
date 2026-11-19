@@ -25,7 +25,11 @@ next phase only**; it does not restate results.
 **Question.** Does normalised dyad similarity materially change **recognition**
 — not channel rank — when its influence on the score is held constant?
 
-**Authorisation status: NOT AUTHORISED.** Designed and design-audited. Two
+> **Update 2026-11-19: EXECUTED** on the researcher's authorisation, at script
+> commit `700906d`. The text below is the unchanged pre-registration; results are
+> in `PHASE_LOG.md` ("Phase 1-D — model-norm dyads at matched influence").
+
+**Authorisation status (as of design, superseded by the note above): NOT AUTHORISED.** Designed and design-audited. Two
 required corrections (F1, F2 below) were identified by the audit and are folded
 into the design as written here. Execution needs separate, explicit approval.
 

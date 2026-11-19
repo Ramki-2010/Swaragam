@@ -692,3 +692,103 @@ environment: Windows Application Control blocked
 blocked this file"). The script therefore uses its own exact permutation
 Mann–Whitney (checked on 3-vs-3 cases: U = 0, p = 0.1, r = −1). Whether other
 scipy submodules are affected is not established. Reported, not worked around.
+
+---
+
+## Phase 1-D — model-norm dyads at matched influence (EXECUTED 2026-11-19)
+
+**Status.** COMPLETE as a measurement; **not interpreted into a diagnosis.**
+Authorised by the researcher in session on 2026-11-19 ("Commence phase 1-D").
+Diagnostic only; ADR-005 blocks any production change regardless of outcome.
+Phase 1-D authorises no successor phase (§17a).
+
+**Provenance.** Script `scripts/sandbox_q003_phase1d_normalized_dyads.py`,
+committed before execution in `700906d` (the plan's reproducibility requirement);
+run on commit `700906d`, clean working tree, Python 3.14.7, numpy 2.3.2, no seed
+(no sampling). Results `Q003 Bhairavi Diagnosis results/run_20261119_182322_phase1d/`
+(gitignored): `per_clip_by_condition.csv`, `condition_transitions.csv`,
+`phase1d_measurements.json`, `run_metadata.json`. Feature cache: 76 files,
+unchanged before/after (fingerprint check). Design exactly as pre-registered in
+`RESEARCH_PLAN.md` with audit corrections F1 (model-norm only), F2 (constants
+imported), F3 (per-clip values captured), F5 (C0). **F4 was not run:** it is
+recommended, not a pre-registered variant, and adding it after the fact would be
+post-hoc.
+
+**Controls (all passed; none interpreted before passing).**
+- Raw-count replication: PASS on all 70 clips.
+- C1 reproduces the canonical baseline: 25c/14w/31u; Bhairavi 1/6/4; →Saveri 4,
+  →Thodi 2.
+- C2 dyad leader counts reproduce Phase 1-C exactly: Bhairavi 8/11, Thodi 5/11,
+  Kalyani 9/14, Saveri 5/8, Shankarabharanam 4/9, Mohanam 3/10, Abhogi 1/7. C2
+  and C3 dyad rankings are identical, as required.
+- Stop condition 4 (degenerate S_nrm): not triggered; min S_nrm = 2.35e-03. The
+  plan gives no numeric threshold for "approximately zero", so only exact or
+  non-finite degeneracy was tested and min S_nrm is reported for judgement.
+
+**Scale control (computed before any accuracy).** mean S_raw = 0.00210981, mean
+S_nrm = 0.02097249, **γ = 0.100599** (std, global). Sensitivity: range-matched
+γ = 0.099688; per-fold γ min 0.0561 / median 0.0985 / max 0.1630.
+
+**Outcomes, correct / wrong / unknown (never pooled).**
+
+| | C0 PCD only | C1 baseline | C2 matched | C3 naive (control) |
+|---|---|---|---|---|
+| **Bhairavi (11)** | 1/4/6 | 1/6/4 | **2/3/6** | 5/0/6 |
+| **Overall (70)** | 19/14/37 | 25/14/31 | **25/11/34** | 33/20/17 |
+| Abhogi (7) | 1/2/4 | 1/2/4 | 1/2/4 | 1/3/3 |
+| Kalyani (14) | 4/2/8 | 6/2/6 | 6/2/6 | 8/4/2 |
+| Mohanam (10) | 1/1/8 | 1/0/9 | 1/0/9 | 3/6/1 |
+| Saveri (8) | 7/1/0 | 7/1/0 | 7/1/0 | 5/2/1 |
+| Shankarabharanam (9) | 3/2/4 | 4/1/4 | 4/1/4 | 6/2/1 |
+| Thodi (11) | 2/2/7 | 5/2/4 | 4/2/5 | 5/3/3 |
+
+Sensitivity, not conditions: per-fold γ gives overall 24/12/34, Bhairavi 2/3/6;
+range-matched γ gives overall 25/11/34, Bhairavi 2/3/6.
+
+**C1 → C2: five clips change category** (all others unchanged):
+Bhairavi_clean_2 unknown → correct; three Bhairavi wrongs → unknown (→Thodi,
+→Saveri, →Thodi: Nee Sari evvaramma, Chintayama Kanda, Sri Raghuvara Sugunaal);
+Thodi "Thappi Bratikipova" correct → unknown. **No wrong answer became correct.**
+In C0 → C1, adding the dyad channel at 0.2 raises Bhairavi wrongs from 4 to 6.
+
+**Saveri attraction (C1 → C2).** Bhairavi clips with Saveri as dyad leader 8 →
+2; Bhairavi wrongs predicted Saveri 4 → 3; Saveri's total incoming errors 8 → 7.
+
+**Alternative-explanation test.** Leader delta (C2 minus C1) against model
+concentration (ascending): Mohanam +1, Abhogi +1, **Bhairavi +8**, Kalyani −1,
+Shankarabharanam 0, Thodi −2, Saveri −1; Spearman ρ = −0.714 at n = 7
+(descriptive). The concentration ordering equals Phase 1-C's; the absolute values
+differ because this run uses the mean L2 of the up and down full-population
+models. Bhairavi is a large outlier, but the sign of ρ is not independent of a
+diffuse-favouring effect and **does not rule it out**.
+
+**Dyad discrimination ratio (L-026), raw → model-norm.** Bhairavi 1.346 → 1.662;
+Saveri 3.690 → 2.276; Thodi 1.748 → 1.522; Kalyani 1.716 → 1.694; Abhogi 0.951 →
+1.127; Mohanam 0.870 → 1.264; Shankarabharanam 1.601 → 1.488.
+
+**C3 (control only).** Overall 33/20/17 and Bhairavi 5/0/6 are the magnitude of the
+effective-weight confound that matching removed. They are not a result about
+normalisation and not a candidate.
+
+**Reading against the pre-registered matrix — not forced.** Bhairavi C2 vs C1 is
+correct +1, wrong −3, unknown +2; overall is correct flat, wrong −3, unknown +3.
+The matrix rows use "improves", "flat" and "degrades" without defining them for
+this case, and the wrong-to-unknown conversions (3 of 3 Bhairavi gains) are
+precisely where the definition matters. No threshold is supplied here (§5).
+*Observed fact:* wrongs fell by 3 overall and in Bhairavi, one Bhairavi unknown
+became correct, one Thodi correct became unknown, and none of the six wrongs
+became correct. The row of the matrix that applies is **a decision for the
+researcher**, not an inference from this entry.
+
+**Limits (labelled).**
+- *Scientific interpretation not made:* no rank or outcome change is called
+  causal; no diagnosis of why PCD selects Saveri/Thodi (still unexplained, the
+  six PCD-driven wrongs remain open).
+- n = 11, a change of 1–3 clips is not statistically meaningful; no significance
+  test was run or is claimed. γ is data-derived by a pre-registered formula.
+- Carried forward: 6 of 11 Bhairavi clips have no recoverable composition,
+  performer or source identity; one Mohanam-labelled clip (Brochevarevarura)
+  matches a Saraga record whose raga is kamas (audit 2026-11-16), left as
+  labelled.
+- ADR-005 revisit gate is unmet (Bhairavi 11 clips < 15–20): **no production
+  change follows.**
