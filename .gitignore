@@ -19,6 +19,7 @@ ML Models/
 Q001A sufficiency results/
 Q001B-A results/
 Q003 Bhairavi Diagnosis results/
+Composition identity audit results/
 scripts/q001ba_canonical.log
 
 # Review Board local audit archive (ADR-021): local retention only, never committed,
