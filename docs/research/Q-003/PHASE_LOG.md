@@ -792,3 +792,23 @@ researcher**, not an inference from this entry.
   labelled.
 - ADR-005 revisit gate is unmet (Bhairavi 11 clips < 15–20): **no production
   change follows.**
+
+### Phase 1-D — matrix reading decided (2026-11-19, researcher-approved)
+
+The "not forced" paragraph above left the matrix reading to the researcher. On
+2026-11-19 the researcher approved this reading:
+
+- **Decision:** a wrong-to-UNKNOWN conversion is **not** counted as "improves".
+  Phase 1-D (C2 vs C1) is recorded as **flat on correct answers** (Bhairavi
+  1 -> 2, overall 25 -> 25) **with fewer wrong answers via abstention** (wrong
+  -14 -> 11 overall; Bhairavi 6 -> 3).
+- **Why:** the matrix defined none of its terms, and defining "improves" after the
+  result would be a retroactive threshold (CLAUDE.md §5, §19). The Bhairavi gain
+  is three wrongs becoming UNKNOWN, which lowers the error rate but does not
+  recognise Bhairavi; none of the six wrongs became correct, and Thodi lost one
+  correct answer.
+- **Not diagnosed:** the six PCD-driven Bhairavi wrongs remain unexplained.
+  Q-003 stays open.
+- **For future pre-registrations:** define "improves", "flat" and "degrades"
+  before the run, with correct and wrong tracked in separate columns.
+- No successor phase is authorised by this entry.
