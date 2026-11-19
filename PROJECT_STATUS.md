@@ -132,6 +132,23 @@ Environment details live in [`CLAUDE.md`](CLAUDE.md) section 9; this is state on
   matrix: Saveri 8, Thodi 4, Kalyani 2. Totals unaffected. See
   docs/research/Q-003/PHASE_LOG.md -> Correction C-6.)
 - No OOD score floor
+- Composition identity is recoverable for only 26 of the 70 canonical clips
+  (composition-identity audit, run 2026-11-16 20:39, descriptive only; script
+  `scripts/sandbox_composition_identity_audit.py`, results
+  `Composition identity audit results/run_20261116_203920/`, git-ignored).
+  Identity here is a Saraga title match, which is INFERENCE; 12 of the 26 are
+  also duration-corroborated (|diff| <= 0.5 s, a descriptive flag, not a
+  threshold). The other 44 clips have no established composition identity
+  (18 of them Varnam-dataset clips whose composition is not established by the
+  script). Distinct work MBIDs identified per raga are LOWER BOUNDS, not
+  counts of independent compositional units: Abhogi 2, Bhairavi 4, Kalyani 4,
+  Mohanam 4, Saveri 3, Shankarabharanam 3, Thodi 4. Stored raga labels agree
+  with the matched Saraga record for 25 of 26 clips. The one disagreement is
+  an **open label question, not resolved and not relabelled**: the
+  Mohanam-labelled clip `Brochevarevarura.vocal_20260320_010235.npz` matches
+  Saraga record "Kuldeep Pai - Brochevarevarura" (raga `kamas`; duration
+  difference -0.01 s). No accuracy was recomputed and no baseline changed; the
+  v1.3.2 figures above stand. Any relabel needs the researcher's decision.
 
 ---
 
